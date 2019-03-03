@@ -21,7 +21,6 @@ import CoreData
         self.tableView.addSubview(self.refresherControl) //concept regarding pull to refresh
        super.viewDidLoad()
         
-      // let count =  CoreDataHandler.getCount()
         empList = CoreDataHandler.fetchObject()!
         
         print("count \(String(describing: empList))")
@@ -45,7 +44,6 @@ import CoreData
         
         let emp = empList[indexPath.row]
          let fileURL = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-       // let dirPath = "\(fileURL)/Images/\(dict["myImage"] ?? "")"
         let dirPath = "\(fileURL)/Images/\(emp.value(forKeyPath: "image") ?? "")"
         //cell.editt.button = UIButton
         cell.imgeView.image = UIImage.init(contentsOfFile: dirPath)
@@ -82,11 +80,7 @@ import CoreData
         story.delegate = self
         self.navigationController?.pushViewController(story, animated: true)
     }
-  /*  func addEmployeeData(dictionary: Dictionary<String, String>) {
-        employeeList.append(dictionary)
-        tableView.reloadData()
-    }*/
-    
+
     func fetchEmployeeData() {
         
         empList = CoreDataHandler.fetchObject()!
@@ -97,18 +91,11 @@ import CoreData
    //Swipe to Delete
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-       // let cell = tableView.cellForRow(at: indexPath) as! EmployeeCell
-        
-//if CoreDataHandler.deleteRecord(id: Int(cell.lblID!.text!)!) {
-            
-            
-//}
-        //let delete  = self.empList[indexPath.row]
+     
         let deleteAction = UIContextualAction(style: .normal, title: "") { (action, view, completion) in
             // Perform your action here
          // remove the item from the data model
-            
-           // let cell = tableView.cellForRow(at: indexPath) as! EmployeeCell
+     
             let emp = self.empList[indexPath.row]
             let id = emp.value(forKeyPath: "id")
             
@@ -124,12 +111,7 @@ import CoreData
                 
             
             }
-//self.empList.remove(at: indexPath.row)
-            
-        
-        // delete the table view row
-        // tableView.deleteRows(at: [indexPath], with: .fade)
-        //    completion(true)
+
         }
         deleteAction.image = #imageLiteral(resourceName: "Delete")
         deleteAction.backgroundColor = UIColor.red
@@ -173,8 +155,6 @@ import CoreData
         return refrsControl
     }()
     @objc func pullToRefresh(_ refrsControl: UIRefreshControl){
-//        var displayString = "Welcome to India!"
-//        employeeList.append(displayString)
         let deadline = DispatchTime.now() + .milliseconds(20)//increase or decrease refreshing time from here
         DispatchQueue.main.asyncAfter(deadline: deadline){
         self.tableView.reloadData()

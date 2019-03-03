@@ -79,9 +79,6 @@ class CoreDataHandler: NSObject {
         
         var isSuccess:Bool = false
         
-        //guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-         //   return
-       // }
         let managedContext = CoreDataHandler.getContext()//appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Employee")
        // let predicate1 = NSPredicate(format: "id = ", <#T##args: CVarArg...##CVarArg#>)
@@ -106,13 +103,10 @@ class CoreDataHandler: NSObject {
             try managedContext.save()
                 
                 isSuccess = true
-           // showAlert(withTitleMessageAndAction: “Sucess!!”, message: “Your record has been updated sucessfully!!”, action: true)
             } catch let error as NSError {
                 
                 print("Could not save. \(error), \(error.userInfo)")
                 isSuccess = false
-               // return false
-            //
             }
             }
             }

@@ -68,14 +68,12 @@ override func viewDidLoad() {
     genderField.inputView = picker
     picker.delegate = self
     picker.dataSource = self
-  //  self.numericSalary.delegate = self // for salary restrict to numeric digits only
     //For Date of Birth
     createDatePicker()
     myImage.isUserInteractionEnabled = true
     let TapGesture = UITapGestureRecognizer(target: self , action: #selector(AddEmployee.ImageTapped))
     self.myImage.addGestureRecognizer(TapGesture)
     if isEdit {
-        //let emp = EmployeeData[0]
         let fileURL = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
         let dirPath = "\(fileURL)/Images/\(emp?.value(forKeyPath: "image") ?? "")"
         //cell.editt.button = UIButton
@@ -127,24 +125,6 @@ override func viewDidLoad() {
         dateField.text = "\(dateString)"
         self.view.endEditing(true)
     }
-    /*
-    // For salary that should be restrict only for  numbers
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == numericSalary
-        {
-            let allowedCharacters = CharacterSet.decimalDigits// for digits only
-            let characterSet =  CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
-            
-        }
-        
-        else
-        {
-            let allowedCharacters = CharacterSet.letters// for letters  only
-            let characterSet =  CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
-        }
-         }  */
  //For Gender
     let picker = UIPickerView()
     @IBOutlet weak var genderField: UITextField!
@@ -242,7 +222,6 @@ override func viewDidLoad() {
         //Check if the images folder is already exist?  if not create it!
         var isDir: ObjCBool = true
         
-        //if (fileManager.fileExists(atPath: imagesFolderPath as String, isDirectory: &isDir) && isDir) == false
         let isExist = FileManager.default.fileExists(atPath: imagesFolderPath, isDirectory:&isDir)
         if isExist == false
         {
